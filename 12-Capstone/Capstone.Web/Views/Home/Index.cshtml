@@ -1,4 +1,11 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IList<NationalParks>
+@{
+    ViewData["Title"] = "National Park Geek";
 }
 
+<div>
+    @foreach(NationalParks park in Model)
+    {
+        @park.Name @park.State @park.Description
+    }
+</div>
