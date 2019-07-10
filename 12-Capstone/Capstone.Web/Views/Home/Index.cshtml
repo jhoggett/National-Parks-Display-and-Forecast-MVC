@@ -1,11 +1,31 @@
-﻿@model IList<NationalParks>
+﻿@model IList<Park>
 @{
     ViewData["Title"] = "National Park Geek";
 }
 
 <div>
-    @foreach(NationalParks park in Model)
-    {
-        @park.Name @park.State @park.Description
-    }
+    <form asp-controller="Home" asp-action="Index">
+        @foreach (Park park in Model)
+        {
+            <table>
+                <tr>
+                    <td>
+                        <a class="park-image" asp-controller="Home" asp-action="Detail" asp-route-parkcode="@park.ParkCode">
+                            <img src="~/images/img/parks/@(park.ParkCode).jpg" /> 
+                        </a>
+                    </td>
+                    <td>
+                        <a class="park-name" asp-controller="Home" asp-action="Detail" asp-route-parkcode="@park.ParkCode">
+                            @park.Name
+                        </a>
+                            @park.State
+                            @park.Description
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
+        }
+    </form>
 </div>

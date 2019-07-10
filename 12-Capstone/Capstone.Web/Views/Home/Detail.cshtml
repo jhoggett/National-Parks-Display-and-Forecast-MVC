@@ -1,0 +1,84 @@
+﻿@model Park
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h2>@Model.Name Details</h2>
+
+<div>
+    <form asp-controller="Home" asp-action="Detail">
+        <table>
+            <tr>
+                <td>
+                    <img src="~/images/img/parks/@(Model.ParkCode).jpg" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Model.Name
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Model.State
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Model.Description
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Acreage: @Model.Acreage
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Elevation: @Model.Elevation feet
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Trail Mileage: @Model.TrailMileage Miles
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Number of Campsites: @Model.Campsites
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Founding Year: @Model.YearFounded
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Annual Visitors: @Model.Visitors
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Model.Quote -
+                    @Model.QuoteSource
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Entry Fee: $@Model.EntryFee
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Number of Animal Species: @Model.AnimalSpecies
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Climate: @Model.Climate
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace Capstone.Web.Models
 {
-    public class NationalParks
+    public class Park
     {
         // The home page should only show a picture of the park, its name, location, and a short summary, 
+        public string ParkCode { get; set; }
         public string Name { get; set; }
         public string State { get; set; }
         public int Acreage { get; set; }
@@ -21,7 +22,7 @@ namespace Capstone.Web.Models
         public string  Description { get; set; }
         public int EntryFee { get; set; }
         public int AnimalSpecies { get; set; }
-      //  public int TrailMileage { get; set; }
+        public decimal TrailMileage { get; set; }
 
     }
 }
