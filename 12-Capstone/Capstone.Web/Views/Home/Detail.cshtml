@@ -1,84 +1,146 @@
-﻿@model Park
+﻿@model WeatherVM
 @{
     ViewData["Title"] = "Detail";
 }
 
-<h2>@Model.Name Details</h2>
+<h2>@Model.Park.Name Details</h2>
 
 <div>
     <form asp-controller="Home" asp-action="Detail">
         <table>
             <tr>
                 <td>
-                    <img src="~/images/img/parks/@(Model.ParkCode).jpg" />
+                    <img src="~/images/img/parks/@(Model.Park.ParkCode).jpg" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    @Model.Name
+                    @Model.Park.Name
                 </td>
             </tr>
             <tr>
                 <td>
-                    @Model.State
+                    @Model.Park.State
                 </td>
             </tr>
             <tr>
                 <td>
-                    @Model.Description
+                    @Model.Park.Description
                 </td>
             </tr>
             <tr>
                 <td>
-                    Acreage: @Model.Acreage
+                    Acreage: @Model.Park.Acreage
                 </td>
             </tr>
             <tr>
                 <td>
-                    Elevation: @Model.Elevation feet
+                    Elevation: @Model.Park.Elevation feet
                 </td>
             </tr>
             <tr>
                 <td>
-                    Trail Mileage: @Model.TrailMileage Miles
+                    Trail Mileage: @Model.Park.TrailMileage Miles
                 </td>
             </tr>
             <tr>
                 <td>
-                    Number of Campsites: @Model.Campsites
+                    Number of Campsites: @Model.Park.Campsites
                 </td>
             </tr>
             <tr>
                 <td>
-                    Founding Year: @Model.YearFounded
+                    Founding Year: @Model.Park.YearFounded
                 </td>
             </tr>
             <tr>
                 <td>
-                    Annual Visitors: @Model.Visitors
+                    Annual Visitors: @Model.Park.Visitors
                 </td>
             </tr>
             <tr>
                 <td>
-                    @Model.Quote -
-                    @Model.QuoteSource
+                    @Model.Park.Quote -
+                    @Model.Park.QuoteSource
                 </td>
             </tr>
             <tr>
                 <td>
-                    Entry Fee: $@Model.EntryFee
+                    Entry Fee: $@Model.Park.EntryFee
                 </td>
             </tr>
             <tr>
                 <td>
-                    Number of Animal Species: @Model.AnimalSpecies
+                    Number of Animal Species: @Model.Park.AnimalSpecies
                 </td>
             </tr>
             <tr>
                 <td>
-                    Climate: @Model.Climate
+                    Climate: @Model.Park.Climate
                 </td>
             </tr>
         </table>
     </form>
 </div>
+
+<h4>Weekly Forecast for @Model.Park.Name</h4>
+
+
+
+<tbody>
+
+    <tr>
+        @foreach (Weather forecast in Model.Weathers)
+        {
+
+            <td><img src="~/images/img/weather/@(forecast.Forecast).png" /></td>
+            <td>@DateTime.Now.DayOfWeek</td>
+            <td>@forecast.Forecast</td>
+            <td>
+                @forecast.Low
+            </td>
+            <td>@forecast.High</td>
+            <td>
+                @if(forecast.Forecast == "snow")
+                {
+                    <p>Pack snowshoes</p>
+                }else if (forecast.Forecast == "rain")
+                {
+                    <p>Pack rain gear and weatherproof shoes</p>
+                }else if (forecast.Forecast == "thunderstorms")
+                {
+                    <p>Seek shelter, avoid hiking on exposed ridges</p>
+                }else if (forecast.Forecast == "sunny")
+                {
+                    <p>Pack sunblock</p>
+                }
+            </td>
+            <td>
+                @if(forecast.High > 75 && (forecast.High - forecast.Low) > 20)
+                {
+                    <p>Bring an extra gallon of water it's hot</p>
+                    <p>Wear breathable layers</p>
+                }else if (forecast.High > 75)
+                {
+                    <p>Bring an extra gallon of water its hot</p>
+                }else if ((forecast.High - forecast.Low) > 20)
+                {
+                    <p>Wear breathable layers</p>
+                }
+            </td>
+            <td>
+                @if (forecast.Low < 20 && (forecast.High - forecast.Low) > 20)
+                {
+                    <p>Keep warm it's freezing</p>
+                    <p>Wear breathable layers</p>
+                }
+                else if (forecast.Low < 20)
+                {
+                    <p>Keep warm it's freezing</p>
+                }
+            </td>
+        }
+    </tr>
+
+
+</tbody>

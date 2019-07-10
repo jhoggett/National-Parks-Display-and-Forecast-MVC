@@ -34,7 +34,7 @@ namespace Capstone.Web
 
             string connectionString = Configuration.GetConnectionString("Default");
             services.AddTransient<INationalParkDAO, NationalParkSqlDAO>(d => new NationalParkSqlDAO(connectionString));
-
+            services.AddTransient<IWeatherDAO, WeatherSqlDAO>(d => new WeatherSqlDAO(connectionString));
 
         }
 

@@ -75,11 +75,7 @@ namespace Capstone.Web.DAL
             }
         }
 
-        public IList<string> GetParkCodes()
-        {
-            throw new NotImplementedException();
-        }
-
+        
         private Park MapRowToPark(SqlDataReader reader)
         {
             Park park = new Park();
@@ -101,5 +97,7 @@ namespace Capstone.Web.DAL
 
             return park;
         }
+
+   
     }
 }
