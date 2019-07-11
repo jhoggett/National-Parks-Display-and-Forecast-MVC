@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Capstone.Web.DAL
 {
-    interface ISurvery
+    public interface ISurveyDAO
     {
         void SaveSurvey(SurveyVM survey);
 
-        int SurveyCount(string parkCode);
+        string SurveyCount(string pakrCode);
+
+        Survey GetSurvey();
 
     }
 }

@@ -12,12 +12,13 @@ namespace Capstone.Web.Controllers
     public class HomeController : Controller
     {
         private INationalParkDAO nationalParkDAO;
-        private IWeatherDAO weatherDAO; 
-        public HomeController(INationalParkDAO nationalParkDAO, IWeatherDAO weatherDAO)
+        private IWeatherDAO weatherDAO;
+        private ISurveyDAO surveyDAO;
+        public HomeController(INationalParkDAO nationalParkDAO, IWeatherDAO weatherDAO, ISurveyDAO surveyDAO)
         {
             this.nationalParkDAO = nationalParkDAO;
-            this.weatherDAO = weatherDAO; 
-
+            this.weatherDAO = weatherDAO;
+            this.surveyDAO = surveyDAO;
         }
 
         public IActionResult Index()
@@ -35,37 +36,36 @@ namespace Capstone.Web.Controllers
 
             return View(vm);
         }
-        public ActionResult Survey(string id)
+        public IActionResult Survey()
         {
-            ParkModel park = parkDal.GetPark(id);
-            SurveyViewModel surveyView = new SurveyViewModel()
-            {
-                Park = park,
-            };
-            return View("Survey", surveyView);
+            SurveyVM vm = new SurveyVM();
+            vm.Parks = nationalParkDAO.GetAllParks();
+            vm.Survey = surveyDAO.GetSurvey();
+
+            return View(vm);
         }
 
         [HttpPost]
-        public ActionResult Survey(SurveyViewModel completedSurvey)
+        public IActionResult Survey(SurveyVM completedSurvey)
         {
-            surveyDal.SaveSurvey(completedSurvey);
+            surveyDAO.SaveSurvey(completedSurvey);
             return RedirectToAction("FavoriteParks");
         }
 
-        public ActionResult FavoriteParks()
+        public IActionResult FavoriteParks()
         {
-            List<Park> parks = parks.G
-            Dictionary<ParkModel, int> parksWithSurveys = new Dictionary<ParkModel, int>();
+            //List<Park> parks = parks.G
+            //Dictionary<ParkModel, int> parksWithSurveys = new Dictionary<ParkModel, int>();
 
-            foreach (Park p in parks)
-            {
-                int count = surveyDal.SurveyCount(p.ParkCode);
-                if (count > 0)
-                {
-                    parksWithSurveys[p] = count;
-                }
-            }
-            return View("FavoriteParks", parksWithSurveys);
+            //foreach (Park p in parks)
+            //{
+            //    int count = surveyDal.SurveyCount(p.ParkCode);
+            //    if (count > 0)
+            //    {
+            //        parksWithSurveys[p] = count;
+            //    }
+            //}
+            return View(/*"FavoriteParks", parksWithSurveys*/);
         }
 
 

@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace Capstone.Web.DAL
 {
-    public class SurveySqlDAO : ISurvery(id); 
+    public class SurveySqlDAO : ISurveyDAO 
     {
 
-        public string connectionString;
+        private string connectionString;
 
         public SurveySqlDAO(string connectionString)
         {
             this.connectionString = connectionString;
         }
 
-        private const string SQL_SaveSurvey = "INSERT INTO survey_result (parkCode, emailAddress, state, activityLevel) " +
+        private const string sqlSaveSurvey = "INSERT INTO survey_result (parkCode, emailAddress, state, activityLevel) " +
             "VALUES (@parkCode, @emailAddress, @state, @activity)";
-        private const string SQL_GetCount = "SELECT COUNT(*) FROM survey_result WHERE parkCode = @parkCode";
+        private const string sqlGetCount = "SELECT COUNT(*) FROM survey_result WHERE parkCode = @parkCode";
 
         public void SaveSurvey(SurveyVM survey)
         {
@@ -29,13 +29,7 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
 
-                    survey.Survey.SurveyId = conn.Q  <int>(SQL_SaveSurvey, new
-                    {
-                        parkCode = survey.Park.ParkCode,
-                        emailAddress = survey.Survey.EmailAddress,
-                        state = survey.Survey.State,
-                        activity = survey.Survey.Activity
-                    }).FirstOrDefault();
+
                 }
             }
             catch (Exception e)
@@ -45,7 +39,7 @@ namespace Capstone.Web.DAL
             }
         }
 
-        public int SurveyCount(string parkCode)
+        public string SurveyCount(string parkCode)
         {
             try
             {
@@ -53,18 +47,18 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
 
-                    int count = conn.     ExecuteScalar<int>(SQL_GetCount, new
-                    {
-                        parkCode = parkCode
-                    });
-                    return count;
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 throw;
             }
+            return parkCode;
+        }
+
+        public Survey GetSurvey()
+        {
+            throw new NotImplementedException();
         }
     }
-}
 }

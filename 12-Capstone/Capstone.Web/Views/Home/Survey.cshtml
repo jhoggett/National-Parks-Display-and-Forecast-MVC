@@ -1,0 +1,13 @@
+﻿@model SurveyVM
+@{
+    ViewData["Title"] = "Survey";
+}
+
+<h2>Survey</h2>
+
+<select>
+    @foreach(Park park in Model.Parks)
+    {
+        <option>@park.Name</option>
+    }
+</select>
