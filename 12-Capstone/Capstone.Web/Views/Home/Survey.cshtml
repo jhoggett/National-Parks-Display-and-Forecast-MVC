@@ -5,17 +5,93 @@
 
 <h2>Favorite Park Survey</h2>
 
+
+
+
 <div>
     <form asp-controller="Home" asp-action="Survey">
-        <label>Please select a park from the dropdown</label>
+
+        <label>Favorite National Park:</label>
         <select>
             @foreach (Park park in Model.Parks)
             {
                 <option>@park.Name</option>
             }
         </select>
-        
-        <label asp-for="@Model.Survey.EmailAddress">Email:</label>
-        <input asp-for="@Model.Survey.EmailAddress" />
+
+        <div>
+            <label>State of residence</label>
+            <select class="survey-select-park" name="State">
+                <option value="AK">AK</option>
+                <option value="AL">AL</option>
+                <option value="AR">AR</option>
+                <option value="AZ">AZ</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DE">DE</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="IA">IA</option>
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="MA">MA</option>
+                <option value="MD">MD</option>
+                <option value="ME">ME</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MO">MO</option>
+                <option value="MS">MS</option>
+                <option value="MT">MT</option>
+                <option value="NC">NC</option>
+                <option value="ND">ND</option>
+                <option value="NE">NE</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>
+                <option value="NV">NV</option>
+                <option value="NY">NY</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VA">VA</option>
+                <option value="VT">VT</option>
+                <option value="WA">WA</option>
+                <option value="WI">WI</option>
+                <option value="WV">WV</option>
+                <option value="WY">WY</option>
+            </select>
+        </div>
+
+
+        <div>
+            <label asp-for="@Model.Survey.State">Your Email: </label>
+            <input asp-for="@Model.Survey.State" />
+        </div>
+        <div>
+            <label>Activity level</label>
+            <div id="activityLevelbuttons">
+                <div class="activityLevelContainerItem"><input type="radio" name="ActivityLevel" value="Inactive"> Inactive</div>
+                <div class="activityLevelContainerItem"><input type="radio" name="ActivityLevel" value="Sedentary"> Sedentary</div>
+                <div class="activityLevelContainerItem"><input type="radio" name="ActivityLevel" value="Active"> Active</div>
+                <div class="activityLevelContainerItem"><input type="radio" name="ActivityLevel" value="Extremely Active"> Extremely Active</div>
+            </div>
+            <div class="survey-container-item" id="survey-button">
+                <button id="survey-submit-button">Submit!</button>
+            </div>
+        </div>
     </form>
 </div>
