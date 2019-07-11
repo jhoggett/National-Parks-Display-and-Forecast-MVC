@@ -35,6 +35,38 @@ namespace Capstone.Web.Controllers
 
             return View(vm);
         }
+        public ActionResult Survey(string id)
+        {
+            ParkModel park = parkDal.GetPark(id);
+            SurveyViewModel surveyView = new SurveyViewModel()
+            {
+                Park = park,
+            };
+            return View("Survey", surveyView);
+        }
+
+        [HttpPost]
+        public ActionResult Survey(SurveyViewModel completedSurvey)
+        {
+            surveyDal.SaveSurvey(completedSurvey);
+            return RedirectToAction("FavoriteParks");
+        }
+
+        public ActionResult FavoriteParks()
+        {
+            List<Park> parks = parks.G
+            Dictionary<ParkModel, int> parksWithSurveys = new Dictionary<ParkModel, int>();
+
+            foreach (Park p in parks)
+            {
+                int count = surveyDal.SurveyCount(p.ParkCode);
+                if (count > 0)
+                {
+                    parksWithSurveys[p] = count;
+                }
+            }
+            return View("FavoriteParks", parksWithSurveys);
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
