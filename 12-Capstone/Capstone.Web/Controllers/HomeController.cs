@@ -39,8 +39,8 @@ namespace Capstone.Web.Controllers
         public IActionResult Survey()
         {
             SurveyVM vm = new SurveyVM();
-            vm.Parks = nationalParkDAO.GetAllParks();
-            //vm.Survey
+            vm.Parks = nationalParkDAO.GetAllParks(); 
+            
 
             return View(vm);
         }
@@ -54,18 +54,8 @@ namespace Capstone.Web.Controllers
 
         public IActionResult FavoriteParks()
         {
-            //List<Park> parks = parks.G
-            //Dictionary<ParkModel, int> parksWithSurveys = new Dictionary<ParkModel, int>();
-
-            //foreach (Park p in parks)
-            //{
-            //    int count = surveyDal.SurveyCount(p.ParkCode);
-            //    if (count > 0)
-            //    {
-            //        parksWithSurveys[p] = count;
-            //    }
-            //}
-            return View(/*"FavoriteParks", parksWithSurveys*/);
+            IList<SurveyVM> surveys = surveyDAO.GetAllSurveys();   
+            return View(surveys);
         }
 
 

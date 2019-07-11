@@ -101,29 +101,34 @@
             </td>
             <td>@forecast.High</td>
             <td>
-                @if(forecast.Forecast == "snow")
+                @if (forecast.Forecast == "snow")
                 {
                     <p>Pack snowshoes</p>
-                }else if (forecast.Forecast == "rain")
+                }
+                else if (forecast.Forecast == "rain")
                 {
                     <p>Pack rain gear and weatherproof shoes</p>
-                }else if (forecast.Forecast == "thunderstorms")
+                }
+                else if (forecast.Forecast == "thunderstorms")
                 {
                     <p>Seek shelter, avoid hiking on exposed ridges</p>
-                }else if (forecast.Forecast == "sunny")
+                }
+                else if (forecast.Forecast == "sunny")
                 {
                     <p>Pack sunblock</p>
                 }
             </td>
             <td>
-                @if(forecast.High > 75 && (forecast.High - forecast.Low) > 20)
+                @if (forecast.High > 75 && (forecast.High - forecast.Low) > 20)
                 {
                     <p>Bring an extra gallon of water it's hot</p>
                     <p>Wear breathable layers</p>
-                }else if (forecast.High > 75)
+                }
+                else if (forecast.High > 75)
                 {
                     <p>Bring an extra gallon of water its hot</p>
-                }else if ((forecast.High - forecast.Low) > 20)
+                }
+                else if ((forecast.High - forecast.Low) > 20)
                 {
                     <p>Wear breathable layers</p>
                 }

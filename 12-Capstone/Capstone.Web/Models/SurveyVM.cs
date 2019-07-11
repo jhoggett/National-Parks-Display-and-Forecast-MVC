@@ -9,6 +9,7 @@ namespace Capstone.Web.Models
     {
         public Survey Survey { get; set; }
         public IList<Park> Parks { get; set; }
+        public Park Park { get; set; }
         public int NumberOfSurveys { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Capstone.Web.DAL
 {
-    public class SurveySqlDAO : ISurveyDAO 
+    public class SurveySqlDAO : ISurveyDAO
     {
 
         private string connectionString;
@@ -56,34 +56,46 @@ namespace Capstone.Web.DAL
             return parkCode;
         }
 
-    //    public Survey GetSurvey()
-    //    {
-    //        Survey survey = new Survey();
+        public IList<SurveyVM> GetAllSurveys()
+        {
+            IList<SurveyVM> output = new List<SurveyVM>();
 
-    //        try
-    //        {
-    //            using (SqlConnection conn = new SqlConnection(connectionString))
-    //            {
-    //                conn.Open();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
 
-    //                string sql = "Select * From park Where parkCode = @parkCode";
+                    SqlCommand cmd = new SqlCommand(@"SELECT park.parkName, park.parkCode, COUNT(*) AS surveyCount
+                                                    FROM park JOIN survey_result ON park.parkCode = survey_result.parkCode 
+                                                    GROUP BY park.parkName, park.parkCode 
+                                                    ORDER BY surveyCount DESC, park.parkName", conn);
 
-    //                SqlCommand cmd = new SqlCommand(sql, conn);
-    //                cmd.Parameters.AddWithValue("@parkCode", parkCode);
-    //                SqlDataReader reader = cmd.ExecuteReader();
+                    SqlDataReader reader = cmd.ExecuteReader();
 
-    //                if (reader.Read())
-    //                {
-    //                    park = MapRowToPark(reader);
-    //                }
+                    while (reader.Read())
+                    {
+                        SurveyVM model = ToPark(reader);
+                        output.Add(model);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return output;
+        }
 
-    //                return park;
-    //            }
-    //        }
-    //        catch (SqlException ex)
-    //        {
-    //            throw;
-    //        }
-    //    }
+        private SurveyVM ToPark(SqlDataReader reader)
+        {
+            SurveyVM model = new SurveyVM();
+
+            model.Park.ParkCode = Convert.ToString(reader["parkCode"]);
+            model.Park.Name = Convert.ToString(reader["parkName"]);
+            model.NumberOfSurveys = Convert.ToInt32(reader["surveyCount"]);
+
+            return model;
+        }
     }
 }
