@@ -56,9 +56,34 @@ namespace Capstone.Web.DAL
             return parkCode;
         }
 
-        public Survey GetSurvey()
-        {
-            throw new NotImplementedException();
-        }
+    //    public Survey GetSurvey()
+    //    {
+    //        Survey survey = new Survey();
+
+    //        try
+    //        {
+    //            using (SqlConnection conn = new SqlConnection(connectionString))
+    //            {
+    //                conn.Open();
+
+    //                string sql = "Select * From park Where parkCode = @parkCode";
+
+    //                SqlCommand cmd = new SqlCommand(sql, conn);
+    //                cmd.Parameters.AddWithValue("@parkCode", parkCode);
+    //                SqlDataReader reader = cmd.ExecuteReader();
+
+    //                if (reader.Read())
+    //                {
+    //                    park = MapRowToPark(reader);
+    //                }
+
+    //                return park;
+    //            }
+    //        }
+    //        catch (SqlException ex)
+    //        {
+    //            throw;
+    //        }
+    //    }
     }
 }

@@ -40,13 +40,13 @@ namespace Capstone.Web.Controllers
         {
             SurveyVM vm = new SurveyVM();
             vm.Parks = nationalParkDAO.GetAllParks();
-            vm.Survey = surveyDAO.GetSurvey();
+            //vm.Survey
 
             return View(vm);
         }
 
         [HttpPost]
-        public IActionResult Survey(SurveyVM completedSurvey)
+        public IActionResult SaveSurveyToDatabase(SurveyVM completedSurvey)
         {
             surveyDAO.SaveSurvey(completedSurvey);
             return RedirectToAction("FavoriteParks");

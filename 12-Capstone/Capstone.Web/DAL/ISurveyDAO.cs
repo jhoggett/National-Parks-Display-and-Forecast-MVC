@@ -12,7 +12,7 @@ namespace Capstone.Web.DAL
 
         string SurveyCount(string pakrCode);
 
-        Survey GetSurvey();
+        //Survey GetSurvey();
 
     }
 }

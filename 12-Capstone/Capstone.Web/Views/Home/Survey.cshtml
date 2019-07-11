@@ -3,11 +3,19 @@
     ViewData["Title"] = "Survey";
 }
 
-<h2>Survey</h2>
+<h2>Favorite Park Survey</h2>
 
-<select>
-    @foreach(Park park in Model.Parks)
-    {
-        <option>@park.Name</option>
-    }
-</select>
+<div>
+    <form asp-controller="Home" asp-action="Survey">
+        <label>Please select a park from the dropdown</label>
+        <select>
+            @foreach (Park park in Model.Parks)
+            {
+                <option>@park.Name</option>
+            }
+        </select>
+        
+        <label asp-for="@Model.Survey.EmailAddress">Email:</label>
+        <input asp-for="@Model.Survey.EmailAddress" />
+    </form>
+</div>
