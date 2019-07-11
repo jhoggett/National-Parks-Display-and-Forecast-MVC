@@ -23,7 +23,7 @@ namespace Capstone.Web.Controllers
 
         public IActionResult Index()
         {
-            IList<Park> parks = nationalParkDAO.GetAllParks(); 
+            IList<Park> parks = nationalParkDAO.GetAllParks();
             return View(parks);
         }
 
@@ -36,25 +36,30 @@ namespace Capstone.Web.Controllers
 
             return View(vm);
         }
+
+
+
+        [HttpGet]
         public IActionResult Survey()
         {
             SurveyVM vm = new SurveyVM();
-            vm.Parks = nationalParkDAO.GetAllParks(); 
-            
+            vm.Parks = nationalParkDAO.GetAllParks();
+
 
             return View(vm);
         }
 
+
         [HttpPost]
-        public IActionResult SaveSurveyToDatabase(SurveyVM completedSurvey)
+        public IActionResult Survey(SurveyVM completedSurvey)
         {
-            surveyDAO.SaveSurvey(completedSurvey);
+            surveyDAO.SaveSurvey(completedSurvey.Survey);
             return RedirectToAction("FavoriteParks");
         }
 
         public IActionResult FavoriteParks()
         {
-            IList<SurveyVM> surveys = surveyDAO.GetAllSurveys();   
+            IList<SurveyVM> surveys = surveyDAO.GetAllSurveys();
             return View(surveys);
         }
 

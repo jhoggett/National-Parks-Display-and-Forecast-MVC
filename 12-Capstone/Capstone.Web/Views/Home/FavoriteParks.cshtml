@@ -1,4 +1,4 @@
-﻿ @model List<Survey>
+﻿ @model List<SurveyVM>
 @{
     ViewData["Title"] = "FavoriteParks";
 }
@@ -15,15 +15,15 @@
                 <th style="text-align:left">Park</th>
                 <th>Favorites</th>
             </tr>
-            @{foreach (Survey item in Model)
+            @{foreach (SurveyVM item in Model)
                 {
                     <tr>
-                        <td><div class="flex-item"><img style="border:1px solid #ddd;border-radius: 4px;padding: 5px;width: 150px;" src="~/Content/img/parks/@(item.ParkCode).jpg" /></div></td>
+                        <td><div class="flex-item"><img style="border:1px solid #ddd;border-radius: 4px;padding: 5px;width: 150px;" src="~/images/img/parks/@(item.Park.ParkCode).jpg" /></div></td>
 
                         <td style="text-align:left;padding-left: 15px; font-size:2vw;">
-                            <a href="~/Home/Detail?ParkCode=@(item.ParkCode)"><div class="flex-item">@item.ParkCode</div></a>
+                            <a href="~/Home/Detail?ParkCode=@(item.Park.ParkCode)"><div class="flex-item">@item.Park.ParkCode</div></a>
                         </td>
-                        <td style="text-align:center;padding-left: 15px; font-size:2vw;"><div>@item.SurveyId</div></td>
+                        <td style="text-align:center;padding-left: 15px; font-size:2vw;"><div>@item.NumberOfSurveys</div></td>
                     </tr>
 
                 }

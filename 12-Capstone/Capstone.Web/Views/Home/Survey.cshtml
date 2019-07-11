@@ -9,19 +9,21 @@
 
 
 <div>
-    <form asp-controller="Home" asp-action="Survey">
+    <form asp-controller="Home" asp-action="Survey" method="post">
 
-        <label>Favorite National Park:</label>
-        <select>
-            @foreach(Park park in Model.Parks)
+        <label asp-for="Park.Name">Favorite National Park:</label>
+        
+        <select asp-for="Survey.ParkCode">
+            @foreach (Park park in Model.Parks)
             {
-                <option>@park.Name</option>
+
+                <option value="@park.ParkCode">@park.Name</option>
             }
         </select>
 
         <div>
-            <label>State of residence</label>
-            <select class="survey-select-park" name="State">
+            <label asp-for="Survey.State">State of residence</label>
+            <select asp-for="Survey.State" class="survey-select-park">
                 <option value="AK">AK</option>
                 <option value="AL">AL</option>
                 <option value="AR">AR</option>
@@ -78,19 +80,19 @@
 
 
         <div>
-            <label asp-for="@Model.Survey.State">Your Email: </label>
-            <input asp-for="@Model.Survey.State" />
+            <label asp-for="Survey.EmailAddress">Your Email: </label>
+            <input asp-for="Survey.EmailAddress" />
         </div>
         <div>
-            <label>Activity level</label>
+            <label asp-for="Survey.Activity">Activity level</label>
             <div id="activityLevelbuttons">
-                <div class="activityLevelContainerItem"><input type="radio" name="ActivityLevel" value="Inactive"> Inactive</div>
-                <div class="activityLevelContainerItem"><input type="radio" name="ActivityLevel" value="Sedentary"> Sedentary</div>
-                <div class="activityLevelContainerItem"><input type="radio" name="ActivityLevel" value="Active"> Active</div>
-                <div class="activityLevelContainerItem"><input type="radio" name="ActivityLevel" value="Extremely Active"> Extremely Active</div>
+                <div class="activityLevelContainerItem"><input type="radio" asp-for="Survey.Activity" value="Inactive"> Inactive</div>
+                <div class="activityLevelContainerItem"><input type="radio" asp-for="Survey.Activity" value="Sedentary"> Sedentary</div>
+                <div class="activityLevelContainerItem"><input type="radio" asp-for="Survey.Activity" value="Active"> Active</div>
+                <div class="activityLevelContainerItem"><input type="radio" asp-for="Survey.Activity" value="Extremely Active"> Extremely Active</div>
             </div>
             <div class="survey-container-item" id="survey-button">
-                <button id="survey-submit-button">Submit!</button>
+                <input type="submit" id="survey-submit-button"></>
             </div>
         </div>
     </form>

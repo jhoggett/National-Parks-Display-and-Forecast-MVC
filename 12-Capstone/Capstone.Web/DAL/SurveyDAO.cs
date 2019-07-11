@@ -17,18 +17,26 @@ namespace Capstone.Web.DAL
             this.connectionString = connectionString;
         }
 
-        private const string sqlSaveSurvey = "INSERT INTO survey_result (parkCode, emailAddress, state, activityLevel) " +
-            "VALUES (@parkCode, @emailAddress, @state, @activity)";
-        private const string sqlGetCount = "SELECT COUNT(*) FROM survey_result WHERE parkCode = @parkCode";
+        //private const string sqlSaveSurvey = "INSERT INTO survey_result (parkCode, emailAddress, state, activityLevel) " +
+        //    "VALUES (@parkCode, @emailAddress, @state, @activity)";
+        //private const string sqlGetCount = "SELECT COUNT(*) FROM survey_result WHERE parkCode = @parkCode";
 
-        public void SaveSurvey(SurveyVM survey)
+        public void SaveSurvey(Survey survey)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
+                    string sql = $"INSERT INTO survey_result VALUES (@parkCode, @emailAddress, @state, @activityLevel)";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
 
+                    cmd.Parameters.AddWithValue("@parkCode", survey.ParkCode);
+                    cmd.Parameters.AddWithValue("@emailAddress", survey.EmailAddress);
+                    cmd.Parameters.AddWithValue("@state", survey.State);
+                    cmd.Parameters.AddWithValue("@activityLevel", survey.Activity);
+
+                    cmd.ExecuteNonQuery();
 
                 }
             }
@@ -90,6 +98,7 @@ namespace Capstone.Web.DAL
         private SurveyVM ToPark(SqlDataReader reader)
         {
             SurveyVM model = new SurveyVM();
+            model.Park = new Park();
 
             model.Park.ParkCode = Convert.ToString(reader["parkCode"]);
             model.Park.Name = Convert.ToString(reader["parkName"]);
