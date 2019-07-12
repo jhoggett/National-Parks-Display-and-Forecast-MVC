@@ -10,16 +10,18 @@
             <table>
                 <tr>
                     <td>
+                        @*link to detail page when picture is selected*@
                         <a class="park-image" asp-controller="Home" asp-action="Detail" asp-route-parkcode="@park.ParkCode">
-                            <img src="~/images/img/parks/@(park.ParkCode).jpg" /> 
+                            <img src="~/images/img/parks/@(park.ParkCode).jpg" />
                         </a>
                     </td>
                     <td>
+                        @* link to detail page when name of park is selected*@
                         <a class="park-name" asp-controller="Home" asp-action="Detail" asp-route-parkcode="@park.ParkCode">
                             @park.Name
                         </a>
-                            @park.State
-                            @park.Description
+                        @park.State
+                        @park.Description
                     </td>
                 </tr>
                 <tr>

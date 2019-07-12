@@ -1,4 +1,4 @@
-﻿ @model List<SurveyVM>
+﻿@model List<SurveyVM>
 @{
     ViewData["Title"] = "FavoriteParks";
 }
@@ -6,11 +6,11 @@
 <h2>FavoriteParks</h2>
 
 <body>
-    <div style="text-align:left;padding-left: 15px; font-size:2vw;"><h1>Favorite Parks</h1></div>
+    <div style="text-align:left"><h1>Favorite Parks</h1></div>
 
-    <div class="flex-container" style="overflow-x:auto">
+    <div class="flex-container">
         <table>
-            <tr style="text-align:center;padding-left: 15px; font-size:2vw;">
+            <tr style="text-align:center">
                 <th></th>
                 <th style="text-align:left">Park</th>
                 <th>Favorites</th>
@@ -18,14 +18,13 @@
             @{foreach (SurveyVM item in Model)
                 {
                     <tr>
-                        <td><div class="flex-item"><img style="border:1px solid #ddd;border-radius: 4px;padding: 5px;width: 150px;" src="~/images/img/parks/@(item.Park.ParkCode).jpg" /></div></td>
+                        <td><div class="flex-item"><img style="border:1px solid #000000" src="~/images/img/parks/@(item.Park.ParkCode).jpg" /></div></td>
 
                         <td style="text-align:left;padding-left: 15px; font-size:2vw;">
                             <a href="~/Home/Detail?ParkCode=@(item.Park.ParkCode)"><div class="flex-item">@item.Park.ParkCode</div></a>
                         </td>
-                        <td style="text-align:center;padding-left: 15px; font-size:2vw;"><div>@item.NumberOfSurveys</div></td>
+                        <td style="text-align:center"><div>@item.NumberOfSurveys</div></td>
                     </tr>
-
                 }
             }
         </table>
