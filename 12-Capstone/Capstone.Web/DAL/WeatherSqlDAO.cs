@@ -16,6 +16,8 @@ namespace Capstone.Web.DAL
         {
             this.connectionString = connectionString;
         }
+
+        // In this method we made a list to return weather for a five day forecast. Also called the MapRowToWeather method for reader. 
         public IList<Weather> GetWeather(string parkCode)
         {
             List<Weather> forecast = new List<Weather>();
@@ -43,6 +45,8 @@ namespace Capstone.Web.DAL
             }
             return forecast;
         }
+        
+        // In this we created a new weather object of type Weatehr used SqlDataReader to convet and fill the properties of weather. 
         private Weather MapRowToWeather(SqlDataReader reader)
         {
             Weather weather = new Weather();
@@ -53,5 +57,7 @@ namespace Capstone.Web.DAL
             weather.High = Convert.ToInt32(reader["high"]);
             return weather; 
         }
+
+      
     }
 }

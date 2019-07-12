@@ -9,10 +9,6 @@ namespace Capstone.Web.DAL
     public interface ISurveyDAO
     {
         void SaveSurvey(Survey survey);
-
-        string SurveyCount(string pakrCode);
-
         IList<SurveyVM> GetAllSurveys();
-
     }
 }

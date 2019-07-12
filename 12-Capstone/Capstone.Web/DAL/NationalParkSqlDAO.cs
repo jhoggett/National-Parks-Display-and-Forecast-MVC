@@ -18,6 +18,8 @@ namespace Capstone.Web.DAL
             this.connectionString = connectionString;
         }
 
+        // Get all parks method returns a list of parks. We wrote this method the simpliest we knew how to by first connecting to the DB 
+        // and  selecting all parks from the table park.
         public IList<Park> GetAllParks()
         {
             List<Park> parks = new List<Park>();
@@ -45,6 +47,7 @@ namespace Capstone.Web.DAL
             return parks;
         }
 
+        // Get park method returns the selected park by passing a string param parkCode in. In this method we used another method called MapRowToPark. 
         public Park GetPark(string parkCode)
         {
             Park park = new Park();
@@ -75,7 +78,7 @@ namespace Capstone.Web.DAL
             }
         }
 
-        
+        // In MapRowToPark we created a new park then set the park properties equal to whats in the DB by using Convert and SqlDataReader
         private Park MapRowToPark(SqlDataReader reader)
         {
             Park park = new Park();
@@ -98,6 +101,5 @@ namespace Capstone.Web.DAL
             return park;
         }
 
-   
     }
 }

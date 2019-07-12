@@ -17,10 +17,7 @@ namespace Capstone.Web.DAL
             this.connectionString = connectionString;
         }
 
-        //private const string sqlSaveSurvey = "INSERT INTO survey_result (parkCode, emailAddress, state, activityLevel) " +
-        //    "VALUES (@parkCode, @emailAddress, @state, @activity)";
-        //private const string sqlGetCount = "SELECT COUNT(*) FROM survey_result WHERE parkCode = @parkCode";
-
+        // Save survey inserts survey that was created into the DB table survey_result 
         public void SaveSurvey(Survey survey)
         {
             try
@@ -47,23 +44,8 @@ namespace Capstone.Web.DAL
             }
         }
 
-        public string SurveyCount(string parkCode)
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            return parkCode;
-        }
-
+        // This method gets the surveys and shows the Name of the park along with the count of surveys rating it the favorite park by
+        // the user. 
         public IList<SurveyVM> GetAllSurveys()
         {
             IList<SurveyVM> output = new List<SurveyVM>();
@@ -95,15 +77,14 @@ namespace Capstone.Web.DAL
             return output;
         }
 
+        // Used for the display part in the Favorite Parks View 
         private SurveyVM ToPark(SqlDataReader reader)
         {
             SurveyVM model = new SurveyVM();
             model.Park = new Park();
-
             model.Park.ParkCode = Convert.ToString(reader["parkCode"]);
             model.Park.Name = Convert.ToString(reader["parkName"]);
             model.NumberOfSurveys = Convert.ToInt32(reader["surveyCount"]);
-
             return model;
         }
     }

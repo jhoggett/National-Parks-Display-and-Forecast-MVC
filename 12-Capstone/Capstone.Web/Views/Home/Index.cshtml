@@ -7,7 +7,7 @@
     <form asp-controller="Home" asp-action="Index">
         @foreach (Park park in Model)
         {
-            <table>
+            <table class="table breadcrumb">
                 <tr>
                     <td>
                         @*link to detail page when picture is selected*@
@@ -15,18 +15,19 @@
                             <img src="~/images/img/parks/@(park.ParkCode).jpg" />
                         </a>
                     </td>
+
                     <td>
                         @* link to detail page when name of park is selected*@
-                        <a class="park-name" asp-controller="Home" asp-action="Detail" asp-route-parkcode="@park.ParkCode">
-                            @park.Name
-                        </a>
-                        @park.State
-                        @park.Description
+                        <h3>
+                            <a class="park-name" asp-controller="Home" asp-action="Detail" asp-route-parkcode="@park.ParkCode">
+                                @park.Name
+                            </a>
+                        </h3>
+                        <p> @park.State</p>
+                        <p> @park.Description</p> 
                     </td>
                 </tr>
-                <tr>
-                    <td></td>
-                </tr>
+
             </table>
         }
     </form>

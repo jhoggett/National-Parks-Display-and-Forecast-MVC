@@ -21,48 +21,44 @@ namespace Capstone.Web.Controllers
             this.surveyDAO = surveyDAO;
         }
 
+        // Home Page
         public IActionResult Index()
         {
             IList<Park> parks = nationalParkDAO.GetAllParks();
             return View(parks);
         }
 
+        // Detail Page for selected park 
         public IActionResult Detail(string parkCode)
         {
             WeatherVM vm = new WeatherVM();
             vm.Park = nationalParkDAO.GetPark(parkCode);
             vm.Weathers = weatherDAO.GetWeather(parkCode);
-
-
             return View(vm);
         }
 
-
-
+        // Survey creation 
         [HttpGet]
         public IActionResult Survey()
         {
             SurveyVM vm = new SurveyVM();
             vm.Parks = nationalParkDAO.GetAllParks();
-
-
             return View(vm);
         }
 
-
+        // Save the created survey and take us to the favorite parks page 
         [HttpPost]
         public IActionResult Survey(SurveyVM completedSurvey)
         {
             surveyDAO.SaveSurvey(completedSurvey.Survey);
             return RedirectToAction("FavoriteParks");
         }
-
+  
         public IActionResult FavoriteParks()
         {
             IList<SurveyVM> surveys = surveyDAO.GetAllSurveys();
             return View(surveys);
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

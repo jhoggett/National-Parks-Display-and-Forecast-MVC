@@ -7,12 +7,12 @@
 
 
 
-
 <div>
     <form asp-controller="Home" asp-action="Survey" method="post">
 
         <label asp-for="Park.Name">Favorite National Park:</label>
-        
+
+        @*drop down for selection of favorite park*@
         <select asp-for="Survey.ParkCode">
             @foreach (Park park in Model.Parks)
             {
@@ -21,6 +21,7 @@
             }
         </select>
 
+        @*drop down for selection of State*@
         <div>
             <label asp-for="Survey.State">State of residence</label>
             <select asp-for="Survey.State" class="survey-select-park">
@@ -78,11 +79,13 @@
             </select>
         </div>
 
-
+        @*text field to hold email entered by user*@
         <div>
             <label asp-for="Survey.EmailAddress">Your Email: </label>
             <input asp-for="Survey.EmailAddress" />
         </div>
+
+        @*used radio buttons for user to select activity level*@
         <div>
             <label asp-for="Survey.Activity">Activity level</label>
             <div id="activityLevelbuttons">
@@ -91,8 +94,9 @@
                 <div class="activityLevelContainerItem"><input type="radio" asp-for="Survey.Activity" value="Active"> Active</div>
                 <div class="activityLevelContainerItem"><input type="radio" asp-for="Survey.Activity" value="Extremely Active"> Extremely Active</div>
             </div>
-            <div class="survey-container-item" id="survey-button">
-                <input type="submit" id="survey-submit-button"></>
+            @*submit button does a HTTPpost and redirects user to favorite parks page.*@
+            <div>
+                <input type="submit" value="Submit" />
             </div>
         </div>
     </form>
