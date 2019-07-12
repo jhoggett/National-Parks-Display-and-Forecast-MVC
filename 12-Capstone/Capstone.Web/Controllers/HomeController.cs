@@ -37,7 +37,7 @@ namespace Capstone.Web.Controllers
             return View(vm);
         }
 
-        // Survey creation 
+        // return the view for creating a survey with a vm passed in populated with parks 
         [HttpGet]
         public IActionResult Survey()
         {
